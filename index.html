@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>exbi ai</title>
+  <link rel="icon" type="image/png" href="Image/favicon.png">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    /* Direct overriding for Agent Resume Details Modal to ensure 100% black text and black close button */
+    #agentDetailsModal, 
+    #agentDetailsModal .modal-content,
+    #agentDetailsModal .modal-header,
+    #agentDetailsModal .modal-body,
+    #agentDetailsModal .modal-title,
+    #agentDetailsModal h3,
+    #agentDetailsModal h5,
+    #agentDetailsModal p,
+    #agentDetailsModal span,
+    #agentDetailsModal div,
+    #agentDetailsModal ul,
+    #agentDetailsModal li,
+    #agentDetailsModal .text-white,
+    #agentDetailsModal .text-secondary,
+    #agentDetailsModal .text-muted {
+      color: #000000 !important;
+    }
+    #agentDetailsModal .modal-content {
+      background-color: #FFFFFF !important;
+      border: 1px solid #E5E5E5 !important;
+    }
+    #agentDetailsModal .modal-header, 
+    #agentDetailsModal .modal-footer {
+      border-color: #F0F0F0 !important;
+      background-color: #FAFAFA !important;
+    }
+    #agentDetailsModal .btn-close {
+      filter: brightness(0) !important;
+    }
+    #agentDetailsModal ul li::marker {
+      color: #000000 !important;
+    }
+    #agentDetailsModal .btn-secondary,
+    #agentDetailsModal .modal-footer .btn-secondary {
+      background-color: #000000 !important;
+      border-color: #000000 !important;
+      color: #FFFFFF !important;
+      font-weight: 600 !important;
+      opacity: 1 !important;
+    }
+    #agentDetailsModal .btn-secondary:hover,
+    #agentDetailsModal .modal-footer .btn-secondary:hover {
+      background-color: #262626 !important;
+      border-color: #262626 !important;
+      color: #FFFFFF !important;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Startup Splash Loader Overlay -->
+  <div id="startup-splash-loader" class="startup-splash-loader">
+    <div class="splash-logo-container">
+      <img src="Image/Exbi.png" alt="exbi ai Logo" class="splash-logo">
+      <div class="splash-spinner-ring"></div>
+    </div>
+  </div>
+
+  <!-- Top Navigation Bar -->
+  <nav class="top-nav">
+    <a href="#" class="nav-brand" onclick="switchSection('workspace')">
+      <img src="Image/Exbi.png" alt="exbi ai Logo" style="height: 32px; width: auto; object-fit: contain;">
+    </a>
+    <ul class="nav-links">
+      <li><a href="#" id="nav-workspace-tab" class="nav-link-item active" onclick="switchSection('workspace')">Workspace</a></li>
+      <li><a href="#" id="nav-dashboard-tab" class="nav-link-item" onclick="switchSection('dashboard')">Dashboard</a></li>
+      <li><a href="#" id="nav-reports-tab" class="nav-link-item" onclick="switchSection('reports')">Reports</a></li>
+      <li><a href="#" id="nav-about-tab" class="nav-link-item" onclick="switchSection('about')">About</a></li>
+    </ul>
+    <div class="nav-actions">
+      <div class="d-flex align-items-center gap-2">
+        <span class="small text-muted" style="font-size: 0.72rem;">Server:</span>
+        <span id="server-status-badge" class="badge bg-secondary" style="font-size: 0.72rem; font-weight: normal;">Checking...</span>
+      </div>
+      <div class="nav-avatar" title="System Settings" data-bs-toggle="modal" data-bs-target="#settingsModal">A</div>
+    </div>
+  </nav>
+
+  <!-- Main Content Wrapper -->
+  <main class="app-container">
+
+    <!-- VIEW 1: WORKSPACE -->
+    <div id="view-workspace">
+      <!-- Hero / Entry Screen (Redesigned with Center exbi ai Logo) -->
+      <section id="workspace-section" class="hero-section">
+        <h1 class="display-title" style="font-size: 2.8rem; letter-spacing: -0.02em; font-weight: 400; margin-bottom: 16px;">Your Agentic Data Analyst Partner</h1>
+        <p class="hero-subtitle" style="font-size: 1.05rem; max-width: 660px; color: var(--text-secondary); line-height: 1.6; margin-bottom: 36px;">
+          Any dataset can be uploaded and it will be treated with efficiency, accuracy, and error-free frameworks by all our experienced agents.
+        </p>
+        
+        <!-- Prompt Style Upload Box -->
+        <div class="prompt-box mb-4">
+          <div class="prompt-area">
+            <div class="prompt-text" onclick="document.getElementById('file-input').click()">
+              <i class="bi bi-paperclip fs-5 text-muted"></i>
+              <span>Attach CSV or Excel dataset...</span>
+            </div>
+            <input type="file" id="file-input" style="display: none;" accept=".csv,.xlsx,.xls" onchange="uploadDataset(this.files[0])">
+            <button class="btn-accent" onclick="document.getElementById('file-input').click()">Upload</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Streamlined Analysis Configuration Panel -->
+      <section id="discovery-wizard-card" class="card-premium wizard-container" style="display: none; max-width: 800px; margin: 30px auto;">
+        <div class="wizard-header text-center mb-4">
+          <span id="wizard-dataset-domain-badge" class="badge bg-primary-subtle text-primary px-3 py-1.5 fs-7 font-monospace">Detecting Domain...</span>
+          <h3 id="wizard-dataset-filename" class="fw-semibold text-white mt-2 mb-1">dataset.csv</h3>
+          <p class="text-secondary small">Choose the analytical modules you would like to run on your dataset.</p>
+        </div>
+
+        <div class="wizard-body">
+          <div class="row mb-4">
+            <div class="col-12">
+              <h6 class="small text-muted mb-3" style="letter-spacing: 0.05em; font-weight: 600;">RECOMMENDED ANALYSIS MODULES</h6>
+              <div class="wizard-recommendations-grid" id="wizard-recommendations-list">
+                <!-- Selectable cards injected here by app.js -->
+              </div>
+            </div>
+          </div>
+
+          <div class="row mb-4">
+            <div class="col-12">
+              <h6 class="small text-muted mb-3" style="letter-spacing: 0.05em; font-weight: 600;">DESIRED OUTPUT DELIVERABLES</h6>
+              <div class="wizard-recommendations-grid">
+                <div>
+                  <div class="recommender-card active" id="card-deliverable-dashboard" onclick="toggleDeliverable('dashboard')">
+                    <input type="checkbox" id="chk-deliverable-dashboard" checked style="display: none;">
+                    <div class="selection-check-icon" id="chk-deliverable-dashboard-icon" style="display: flex;">
+                      <i class="bi bi-check-lg"></i>
+                    </div>
+                    <div class="card-icon-wrapper">
+                      <i class="bi bi-speedometer2"></i>
+                    </div>
+                    <div class="card-title-text">Interactive Analytics Dashboard</div>
+                    <div class="card-desc-text" title="KPI cards and validated data charts.">KPI cards and validated data charts.</div>
+                  </div>
+                </div>
+                <div>
+                  <div class="recommender-card active" id="card-deliverable-report" onclick="toggleDeliverable('report')">
+                    <input type="checkbox" id="chk-deliverable-report" checked style="display: none;">
+                    <div class="selection-check-icon" id="chk-deliverable-report-icon" style="display: flex;">
+                      <i class="bi bi-check-lg"></i>
+                    </div>
+                    <div class="card-icon-wrapper">
+                      <i class="bi bi-file-earmark-bar-graph"></i>
+                    </div>
+                    <div class="card-title-text">Executive Business Report</div>
+                    <div class="card-desc-text" title="Structured markdown report with downloads (PDF, DOCX).">Structured markdown report with downloads (PDF, DOCX).</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="text-center mt-5">
+            <button class="btn-accent px-5 py-3 fs-6 fw-semibold" id="wizard-launch-btn" onclick="startAnalyticsWorkflow()">
+              Generate Analytics
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- About Section -->
+      <section id="about-section" class="about-section mt-5 pt-5 border-top" style="border-color: rgba(255, 255, 255, 0.08) !important; display: none;">
+        <div class="text-center mb-5">
+          <h2 class="fw-light text-white m-0" style="font-size: 1.75rem; letter-spacing: -0.02em;">Autonomous Agent Ecosystem</h2>
+          <p class="text-muted small mt-2 mb-0" style="font-size: 0.9rem;">exbi ai operates a coordinated ecosystem of specialized AI agents managing the analytics lifecycle.</p>
+        </div>
+
+        <div class="agents-container">
+          <!-- Card 0: CEO -->
+          <div class="agent-card">
+            <div class="agent-avatar-frame">
+              <img src="Image/avatar_amaldev.png" alt="Amaldev K M" class="agent-avatar-img w-100 h-100 object-fit-cover">
+            </div>
+            <h6 class="fw-semibold m-0 text-truncate" style="font-size: 0.95rem;">Amaldev K M</h6>
+            <p class="text-muted small mt-1 mb-3 text-truncate" style="font-size: 0.78rem;">Founder & CEO</p>
+            <button class="btn-border btn-sm w-100 py-1.5" onclick="showAgentDetails('ceo')">Resume</button>
+          </div>
+
+          <!-- Card 1: Dataset Intelligence -->
+          <div class="agent-card">
+            <div class="agent-avatar-frame">
+              <img src="Image/avatar_victor.png" alt="Victor Vance" class="agent-avatar-img w-100 h-100 object-fit-cover">
+            </div>
+            <h6 class="fw-semibold m-0 text-truncate" style="font-size: 0.95rem;">Victor Vance</h6>
+            <p class="text-muted small mt-1 mb-3 text-truncate" style="font-size: 0.78rem;">Lead Ingestion Engineer</p>
+            <button class="btn-border btn-sm w-100 py-1.5" onclick="showAgentDetails('dataset_intelligence')">Resume</button>
+          </div>
+
+          <!-- Card 2: Business Analyst -->
+          <div class="agent-card">
+            <div class="agent-avatar-frame">
+              <img src="Image/avatar_gary.png" alt="Michael Reed" class="agent-avatar-img w-100 h-100 object-fit-cover">
+            </div>
+            <h6 class="fw-semibold m-0 text-truncate" style="font-size: 0.95rem;">Michael Reed</h6>
+            <p class="text-muted small mt-1 mb-3 text-truncate" style="font-size: 0.78rem;">Senior Business Analyst</p>
+            <button class="btn-border btn-sm w-100 py-1.5" onclick="showAgentDetails('business_analyst')">Resume</button>
+          </div>
+
+          <!-- Card 3: Data Quality -->
+          <div class="agent-card">
+            <div class="agent-avatar-frame">
+              <img src="Image/avatar_quinn.png" alt="Quinn Vance" class="agent-avatar-img w-100 h-100 object-fit-cover">
+            </div>
+            <h6 class="fw-semibold m-0 text-truncate" style="font-size: 0.95rem;">Quinn Vance</h6>
+            <p class="text-muted small mt-1 mb-3 text-truncate" style="font-size: 0.78rem;">Principal Quality Engineer</p>
+            <button class="btn-border btn-sm w-100 py-1.5" onclick="showAgentDetails('data_quality')">Resume</button>
+          </div>
+
+          <!-- Card 4: Visualization -->
+          <div class="agent-card">
+            <div class="agent-avatar-frame">
+              <img src="Image/avatar_regina.png" alt="Regina Chen" class="agent-avatar-img w-100 h-100 object-fit-cover">
+            </div>
+            <h6 class="fw-semibold m-0 text-truncate" style="font-size: 0.95rem;">Regina Chen</h6>
+            <p class="text-muted small mt-1 mb-3 text-truncate" style="font-size: 0.78rem;">Senior Viz Architect</p>
+            <button class="btn-border btn-sm w-100 py-1.5" onclick="showAgentDetails('visualization')">Resume</button>
+          </div>
+
+          <!-- Card 5: Reporting -->
+          <div class="agent-card">
+            <div class="agent-avatar-frame">
+              <img src="Image/avatar_dave.png" alt="David Kim" class="agent-avatar-img w-100 h-100 object-fit-cover">
+            </div>
+            <h6 class="fw-semibold m-0 text-truncate" style="font-size: 0.95rem;">David Kim</h6>
+            <p class="text-muted small mt-1 mb-3 text-truncate" style="font-size: 0.78rem;">Executive Reporting Analyst</p>
+            <button class="btn-border btn-sm w-100 py-1.5" onclick="showAgentDetails('reporting')">Resume</button>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- VIEW 2: DASHBOARD (Hidden Initially) -->
+    <div id="view-dashboard" style="display: none;">
+      <!-- Dashboard Header -->
+      <header class="d-flex justify-content-between align-items-center mb-4 pb-3 border-bottom" style="border-color: rgba(255,255,255,0.08) !important;">
+        <div>
+          <h2 class="fw-medium text-white m-0" style="font-size: 1.8rem; letter-spacing: -0.02em;">Consultation Dashboard</h2>
+          <div class="d-flex align-items-center gap-3 mt-1" style="font-size: 0.8rem;">
+            <span class="text-muted">Project ID: <code class="fw-semibold text-white" id="project-ref-id">N/A</code></span>
+            <span class="text-muted">•</span>
+            <span class="text-muted">Client: <span class="fw-medium text-white">Enterprise Client</span></span>
+          </div>
+        </div>
+        <div class="d-flex align-items-center gap-2">
+          <span id="processing-badge" class="badge bg-secondary px-3 py-1.5 font-monospace" style="font-weight: normal; font-size: 0.75rem;">Processing...</span>
+          <button class="btn-border btn-sm" onclick="downloadFile('docx')"><i class="bi bi-box-arrow-up-right me-1"></i> Export</button>
+          <button class="btn-accent btn-sm" onclick="downloadFile('pdf')"><i class="bi bi-file-pdf me-1"></i> PDF</button>
+          <button class="btn-border btn-sm" onclick="switchSection('dashboard')" title="Refresh"><i class="bi bi-arrow-clockwise"></i></button>
+        </div>
+      </header>
+
+      <!-- Active State live logs console -->
+      <section id="running-state-view" class="row g-4 mb-4">
+        <div class="col-12">
+          <div class="card-premium">
+            <h6 class="card-title-premium text-white"><i class="bi bi-terminal text-muted me-2"></i>Analysis Execution Console</h6>
+            <p class="text-muted small">Live output streams from the internal AI agents cleansing and validating the dataset.</p>
+            <div id="terminal-logs-container" class="thinking-logs" style="height: 250px;">
+              <!-- Logs injected dynamically -->
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Dashboard Outputs (Visible only on completion) -->
+      <div id="completed-dashboard-content" style="display: none;">
+
+        <!-- Executive KPIs -->
+        <h6 class="small text-muted mb-3" style="letter-spacing: 0.05em; font-weight: 600;">KEY PERFORMANCE INDICATORS</h6>
+        <div class="row g-3 mb-4" id="kpis-container-row">
+          <!-- KPI widgets injected here -->
+        </div>
+
+        <!-- Charts & Visuals -->
+        <h6 class="small text-muted mb-3 mt-4" style="letter-spacing: 0.05em; font-weight: 600;">PRIMARY VISUALIZATIONS & SEGMENT DATA</h6>
+        <div class="row text-start" id="charts-container-row">
+          <!-- Charts injected here -->
+        </div>
+
+        <!-- Quality Metrics & Governance Validation -->
+        <div class="row g-4 mt-2">
+          <!-- Left: Data Quality Scorecard -->
+          <div class="col-lg-6">
+            <div class="card-premium h-100">
+              <h6 class="card-title-premium text-white"><i class="bi bi-clipboard-data text-muted me-2"></i>Data Quality Scorecard</h6>
+              <p class="text-muted small mb-4">Cleansing and imputation status monitored by Quinn (Clean Master).</p>
+              
+              <div class="space-y-4">
+                <div class="mb-3">
+                  <div class="d-flex justify-content-between align-items-center mb-1">
+                    <span class="small text-secondary fw-medium">Missing Values Imputed</span>
+                    <span class="badge bg-success-subtle text-success small" style="font-size: 0.65rem;">100% Cleansed</span>
+                  </div>
+                  <div class="progress" style="height: 6px; background-color: rgba(255,255,255,0.05);">
+                    <div class="progress-bar bg-success" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                  </div>
+                </div>
+
+                <div class="mb-3">
+                  <div class="d-flex justify-content-between align-items-center mb-1">
+                    <span class="small text-secondary fw-medium">Irregular Casings Standardized</span>
+                    <span class="badge bg-success-subtle text-success small" style="font-size: 0.65rem;">100% Standardized</span>
+                  </div>
+                  <div class="progress" style="height: 6px; background-color: rgba(255,255,255,0.05);">
+                    <div class="progress-bar bg-success" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                  </div>
+                </div>
+
+                <div class="mb-3">
+                  <div class="d-flex justify-content-between align-items-center mb-1">
+                    <span class="small text-secondary fw-medium">Whitespace Anomalies Cleared</span>
+                    <span class="badge bg-success-subtle text-success small" style="font-size: 0.65rem;">100% Verified</span>
+                  </div>
+                  <div class="progress" style="height: 6px; background-color: rgba(255,255,255,0.05);">
+                    <div class="progress-bar bg-success" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                  </div>
+                </div>
+
+                <div class="mb-0">
+                  <div class="d-flex justify-content-between align-items-center mb-1">
+                    <span class="small text-secondary fw-medium">Total Rows Retained</span>
+                    <span class="badge bg-info-subtle text-info small" style="font-size: 0.65rem;" id="val-rows-summary">0 remaining</span>
+                  </div>
+                  <div class="progress" style="height: 6px; background-color: rgba(255,255,255,0.05);">
+                    <div class="progress-bar bg-info" id="val-rows-progress" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Right: AI Governance Verdict -->
+          <div class="col-lg-6">
+            <div class="card-premium h-100">
+              <h6 class="card-title-premium text-white"><i class="bi bi-shield-check text-muted me-2"></i>AI Governance Verdict</h6>
+              <div class="row align-items-center mt-3">
+                <div class="col-md-5 text-center border-end" style="border-color: rgba(255,255,255,0.08) !important;">
+                  <!-- Radial Progress Circle SVG -->
+                  <div class="position-relative d-inline-flex align-items-center justify-content-center mb-2">
+                    <svg class="radial-progress-svg" style="width: 90px; height: 90px; transform: rotate(-90deg);">
+                      <circle cx="45" cy="45" r="40" stroke="rgba(255,255,255,0.04)" stroke-width="6" fill="transparent" />
+                      <circle id="gov-radial-circle" cx="45" cy="45" r="40" stroke="#10B981" stroke-width="6" fill="transparent" stroke-dasharray="251.2" stroke-dashoffset="12.5" />
+                    </svg>
+                    <div class="position-absolute text-center">
+                      <span id="gov-score" class="fw-bold text-white d-block" style="font-size: 1.4rem;">95%</span>
+                      <span class="badge bg-success-subtle text-success" style="font-size: 0.55rem; font-weight: bold; letter-spacing: 0.05em; padding: 2px 6px;">APPROVED</span>
+                    </div>
+                  </div>
+                  <div class="small text-muted fw-semibold mt-1" style="font-size: 0.65rem; letter-spacing: 0.05em; text-transform: uppercase;">VERDICT COMPLIANCE</div>
+                </div>
+                
+                <div class="col-md-7 ps-md-4">
+                  <div class="mb-3">
+                    <span class="badge bg-success-subtle text-success small mb-2 d-inline-flex align-items-center gap-1" style="font-weight: 500; font-size: 0.65rem;">
+                      <i class="bi bi-patch-check-fill"></i> Certified by AI Governance Committee
+                    </span>
+                    <p id="gov-verdict" class="text-secondary small mt-1 mb-2 leading-relaxed" style="font-size: 0.8rem; line-height: 1.5;"></p>
+                  </div>
+                  
+                  <div class="border-top pt-2" style="border-color: rgba(255,255,255,0.08) !important; font-size: 0.72rem;">
+                    <div class="row g-2 text-muted">
+                      <div class="col-6">Compliance: <span class="text-white fw-medium">Passed</span></div>
+                      <div class="col-6">Sign-off: <span class="text-white fw-medium" id="gov-officer">Gary Stone</span></div>
+                      <div class="col-12 mt-1">Audit: <span class="text-white font-monospace" id="gov-timestamp">2026-06-20 12:00</span></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Downloads Center -->
+      <div id="downloads-section-card" class="card-premium mt-4" style="display: none;">
+        <h6 class="card-title-premium text-white"><i class="bi bi-download text-muted me-2"></i>Project Download Center</h6>
+        <p class="text-secondary small mb-3">Download the compiled reports and clean analytical data files.</p>
+        
+        <div class="row row-cols-2 row-cols-md-3 row-cols-lg-6 g-2">
+          <div class="col">
+            <button class="sandbox-item-btn w-100 p-3 h-100 text-center d-flex flex-column align-items-center justify-content-center" onclick="downloadFile('zip')" style="border-color: rgba(37, 99, 235, 0.4);">
+              <i class="bi bi-file-zip-fill fs-4 text-primary mb-2"></i>
+              <span class="fw-medium text-white d-block">Download All (ZIP)</span>
+              <span class="text-muted d-block mt-1" style="font-size: 0.65rem;">PDF, PPT, Data bundled</span>
+            </button>
+          </div>
+          <div class="col">
+            <button class="sandbox-item-btn w-100 p-3 h-100 text-center d-flex flex-column align-items-center justify-content-center" onclick="downloadFile('cleaned_csv')">
+              <i class="bi bi-filetype-csv fs-4 text-muted mb-2"></i>
+              <span class="fw-medium text-white d-block">Cleaned Data (CSV)</span>
+              <span class="text-muted d-block mt-1" style="font-size: 0.65rem;">Deduplicated values</span>
+            </button>
+          </div>
+          <div class="col">
+            <button class="sandbox-item-btn w-100 p-3 h-100 text-center d-flex flex-column align-items-center justify-content-center" onclick="downloadFile('excel')">
+              <i class="bi bi-file-earmark-excel fs-4 text-muted mb-2"></i>
+              <span class="fw-medium text-white d-block">Styled Excel (XLSX)</span>
+              <span class="text-muted d-block mt-1" style="font-size: 0.65rem;">Multi-tab workbook</span>
+            </button>
+          </div>
+          <div class="col">
+            <button class="sandbox-item-btn w-100 p-3 h-100 text-center d-flex flex-column align-items-center justify-content-center" onclick="downloadFile('pptx')">
+              <i class="bi bi-file-earmark-slides fs-4 text-muted mb-2"></i>
+              <span class="fw-medium text-white d-block">Presentation (PPTX)</span>
+              <span class="text-muted d-block mt-1" style="font-size: 0.65rem;">Consulting slide deck</span>
+            </button>
+          </div>
+          <div class="col">
+            <button class="sandbox-item-btn w-100 p-3 h-100 text-center d-flex flex-column align-items-center justify-content-center" onclick="downloadFile('pdf')">
+              <i class="bi bi-file-pdf fs-4 text-muted mb-2"></i>
+              <span class="fw-medium text-white d-block">Executive Report (PDF)</span>
+              <span class="text-muted d-block mt-1" style="font-size: 0.65rem;">Complete styled document</span>
+            </button>
+          </div>
+          <div class="col">
+            <button class="sandbox-item-btn w-100 p-3 h-100 text-center d-flex flex-column align-items-center justify-content-center" onclick="downloadFile('docx')">
+              <i class="bi bi-file-word fs-4 text-muted mb-2"></i>
+              <span class="fw-medium text-white d-block">Word Document (DOCX)</span>
+              <span class="text-muted d-block mt-1" style="font-size: 0.65rem;">Editable business layout</span>
+            </button>
+          </div>
+        </div>
+        
+        <div class="d-flex justify-content-end mt-4">
+          <button class="btn-accent px-4 py-2" onclick="switchSection('reports')">
+            Open Document Reader &rarr;
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- VIEW 3: REPORTS (Hidden Initially) -->
+    <div id="view-reports" style="display: none;">
+      <!-- Header Actions -->
+      <header class="d-flex justify-content-between align-items-baseline mb-4 pb-3 border-bottom" style="border-color: var(--border-color) !important;">
+        <div>
+          <h2 class="fw-light text-white m-0" style="font-size: 1.75rem; letter-spacing: -0.02em;">Executive Report Reader</h2>
+          <p class="text-muted small mt-1 mb-0">Project Reference: <code class="fw-bold text-white" id="report-ref-id">N/A</code></p>
+        </div>
+        <div class="d-flex gap-2">
+          <button class="btn-border" onclick="downloadFile('excel')">
+            <i class="bi bi-file-earmark-excel me-1"></i> Excel Report
+          </button>
+          <button class="btn-border" onclick="downloadFile('pptx')">
+            <i class="bi bi-file-earmark-slides me-1"></i> PPTX Slides
+          </button>
+          <button class="btn-border" onclick="downloadFile('pdf')">
+            <i class="bi bi-file-pdf me-1"></i> Download PDF
+          </button>
+          <button class="btn-border" onclick="downloadFile('docx')">
+            <i class="bi bi-file-word me-1"></i> Download Word
+          </button>
+        </div>
+      </header>
+
+      <!-- Split Document Layout -->
+      <div class="report-layout">
+        
+        <!-- Left: Table of Contents -->
+        <aside class="report-toc">
+          <div class="toc-title">Document Outline</div>
+          <ul class="toc-list">
+            <li class="toc-item active" id="toc-cover"><a href="#cover">1. Document Cover</a></li>
+            <li class="toc-item" id="toc-exec-summary"><a href="#sec-executive-summary">2. Executive Summary</a></li>
+            <li class="toc-item" id="toc-dataset-overview"><a href="#sec-dataset-overview">3. Dataset Overview</a></li>
+            <li class="toc-item" id="toc-quality-findings"><a href="#sec-data-quality-findings">4. Data Quality Findings</a></li>
+            <li class="toc-item" id="toc-key-insights"><a href="#sec-key-insights">5. Key Insights</a></li>
+            <li class="toc-item" id="toc-dashboard-highlights"><a href="#sec-dashboard-highlights">6. Dashboard Highlights</a></li>
+            <li class="toc-item" id="toc-recommendations"><a href="#sec-recommendations">7. Recommendations</a></li>
+            <li class="toc-item" id="toc-conclusion"><a href="#sec-conclusion">8. Conclusion</a></li>
+          </ul>
+        </aside>
+
+        <!-- Right: Scrolling Reading Sheet -->
+        <article class="report-content" id="report-sheet">
+          <!-- Document Cover Page -->
+          <div id="cover" class="report-paper-cover">
+            <img src="Image/Exbi.png" alt="exbi ai Logo" style="height: 64px; width: auto; object-fit: contain; margin-bottom: 24px; display: block;">
+            <p class="text-muted small uppercase tracking-wider mb-5" style="letter-spacing: 0.1em; font-size: 0.75rem;">Executive Business Strategy & Consulting Report</p>
+            <div class="text-muted small mt-4 pt-4 border-top" style="border-color: var(--border-color) !important; font-size: 0.8rem; line-height: 1.6;">
+              Compiled by: exbi ai Analytics Pipeline<br>
+              Audited & Approved by: Data Quality & Reporting Agents
+            </div>
+          </div>
+
+          <!-- Markdown body parsing output -->
+          <div id="report-markdown-body" class="report-markdown-body">
+            <div class="text-center py-5">
+              <div class="spinner-border text-light spinner-border-sm" role="status"></div>
+              <p class="text-muted small mt-2">Assembling paper document layout...</p>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+
+    <!-- Combined About team is now inline within the Workspace tab to create a scrolling Hero + About landing view. -->
+
+  </main>
+
+  <!-- Cinematic Reasoning Loader Overlay -->
+  <div id="thinking-overlay" class="thinking-overlay" style="display: none;">
+    <div class="thinking-loader-container">
+      
+      <!-- Top: exbi ai Logo -->
+      <div class="thinking-logo-section text-center mb-4">
+        <img src="Image/Exbi.png" alt="exbi ai Logo" style="height: 48px; width: auto; object-fit: contain; margin-bottom: 8px;">
+        <p class="thinking-logo-subtitle">AI-Powered Business Intelligence</p>
+      </div>
+      
+      <!-- Middle: Horizontal Timeline Progress Component -->
+      <div class="thinking-stepper-horizontal">
+        <div class="thinking-stepper-progress-bar" id="stepper-progress-bar"></div>
+        <div class="step-item-horizontal" id="step-loader-1">
+          <div class="step-circle-horizontal" id="circle-loader-1">○</div>
+          <span class="step-name-horizontal">Analyze Dataset</span>
+        </div>
+        <div class="step-item-horizontal" id="step-loader-2">
+          <div class="step-circle-horizontal" id="circle-loader-2">○</div>
+          <span class="step-name-horizontal">Generate Insights</span>
+        </div>
+        <div class="step-item-horizontal" id="step-loader-3">
+          <div class="step-circle-horizontal" id="circle-loader-3">○</div>
+          <span class="step-name-horizontal">Build Dashboard</span>
+        </div>
+        <div class="step-item-horizontal" id="step-loader-4">
+          <div class="step-circle-horizontal" id="circle-loader-4">○</div>
+          <span class="step-name-horizontal">Prepare Report</span>
+        </div>
+        <div class="step-item-horizontal" id="step-loader-5">
+          <div class="step-circle-horizontal" id="circle-loader-5">○</div>
+          <span class="step-name-horizontal">Complete</span>
+        </div>
+      </div>
+      
+      <!-- Middle: Agent Thinking Section -->
+      <div class="thinking-label-section">
+        <span class="thinking-sparkle">✦</span>
+        <span class="thinking-text" id="terminal-thinking-label">Thinking</span>
+      </div>
+      
+      <!-- Bottom: Terminal Window -->
+      <div class="thinking-terminal-window">
+        <div class="thinking-terminal-header">
+          <div class="terminal-dots">
+            <span class="dot red"></span>
+            <span class="dot yellow"></span>
+            <span class="dot green"></span>
+          </div>
+          <div class="terminal-filename" id="terminal-filename-display">dataset.csv</div>
+        </div>
+        <div class="thinking-terminal-body" id="thinking-logs">
+          <!-- Terminal log lines injected here -->
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
+  <!-- Settings Modal -->
+  <div class="modal fade" id="settingsModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title fw-semibold text-white"><i class="bi bi-gear-fill me-2"></i>System Configuration</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3">
+            <label for="backend-url-input" class="form-label fw-medium text-white">FastAPI Backend API URL</label>
+            <input type="text" class="form-control" id="backend-url-input" placeholder="http://127.0.0.1:8000">
+            <div class="form-text small text-muted mt-2">Default API endpoint: <code>http://127.0.0.1:8000</code>. Modify to Render cloud URL if deploying to production.</div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary btn-sm" data-bs-dismiss="modal" onclick="saveSettings()">Save Settings</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Agent Details Popup Modal -->
+  <div class="modal fade" id="agentDetailsModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title fw-semibold text-white" id="agent-modal-title">Agent Profile</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row g-4">
+            <!-- Left Column: Portrait & Basic Meta Details -->
+            <div class="col-md-5 text-center border-end border-secondary border-opacity-10">
+              <div class="agent-avatar-frame mx-auto mb-3" style="width: 130px; height: 130px;">
+                <img id="agent-modal-avatar" src="" alt="Agent Avatar" class="agent-avatar-img w-100 h-100 object-fit-cover">
+              </div>
+              <h3 id="agent-modal-name" class="fw-bold m-0 text-white" style="font-size: 1.5rem;">Name</h3>
+              <p id="agent-modal-role" class="text-secondary small mt-1 mb-3" style="font-weight: 500;">Role</p>
+              
+              <div class="d-flex flex-column gap-2.5 mt-4 text-start border-top border-secondary border-opacity-10 pt-3 px-2" style="font-size: 0.8rem;">
+                <div><span class="text-muted">Agent ID:</span> <span id="agent-modal-id" class="font-monospace text-white fw-medium">AGT-001</span></div>
+                <div><span class="text-muted">Agent Type:</span> <span id="agent-modal-type" class="text-white fw-medium">AI</span></div>
+                <div><span class="text-muted">Department:</span> <span id="agent-modal-dept" class="text-white fw-medium">Department</span></div>
+                <div><span class="text-muted">Experience:</span> <span id="agent-modal-exp" class="text-white fw-medium">10+ Years</span></div>
+                <div><span class="text-muted">Current Role:</span> <span id="agent-modal-current-role" class="text-white fw-medium">Role in exbi ai</span></div>
+              </div>
+            </div>
+            
+            <!-- Right Column: Skills, Responsibilities, Capabilities, Deliverables -->
+            <div class="col-md-7">
+              <div class="mb-3">
+                <span id="agent-modal-h-skills" class="small d-block mb-1.5 text-muted fw-bold" style="font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em;">Core Skills</span>
+                <ul id="agent-modal-skills" class="small ps-3 mb-0 text-secondary">
+                  <!-- Dynamically populated -->
+                </ul>
+              </div>
+              
+              <div class="mb-3">
+                <span id="agent-modal-h-resp" class="small d-block mb-1.5 text-muted fw-bold" style="font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em;">Responsibilities</span>
+                <ul id="agent-modal-responsibilities" class="small ps-3 mb-0 text-secondary">
+                  <!-- Dynamically populated -->
+                </ul>
+              </div>
+
+              <div class="mb-3">
+                <span id="agent-modal-h-cap" class="small d-block mb-1.5 text-muted fw-bold" style="font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em;">Capabilities</span>
+                <ul id="agent-modal-capabilities" class="small ps-3 mb-0 text-secondary">
+                  <!-- Dynamically populated -->
+                </ul>
+              </div>
+              
+              <div>
+                <span id="agent-modal-h-deliv" class="small d-block mb-1.5 text-muted fw-bold" style="font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em;">Example Deliverables</span>
+                <ul id="agent-modal-deliverables" class="small ps-3 mb-0 text-secondary">
+                  <!-- Dynamically populated -->
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary btn-sm px-4" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

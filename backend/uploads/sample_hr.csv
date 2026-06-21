@@ -1,0 +1,121 @@
+Employee_ID,Age,Department,MonthlyIncome,Attrition,Tenure
+EMP001,30,Engineering,15446.0,No,14
+EMP002,46,Sales,12426.0,No,12
+EMP003,25,Research & Development,8403.0,No,7
+EMP004,45,Sales,15010.0,Yes,10
+EMP005,37,Engineering,5374.0,No,7
+EMP006,32,Research & Development,3437.0,Yes,12
+EMP007,52,Research & Development,5036.0,No,8
+EMP008,56,Engineering,14877.0,No,3
+EMP009,24,Sales,10335.0,No,5
+EMP010,56,Engineering,11115.0,Yes,4
+EMP011,36,Research & Development,,No,11
+EMP012,56,Sales,,No,8
+EMP013,46,Sales,,No,13
+EMP014,37,Research & Development,,No,1
+EMP015,58,Marketing,13320.0,Yes,2
+EMP016,38,Sales,11825.0,No,3
+EMP017,31,Research & Development,15322.0,No,5
+EMP018,51,Human Resources,12425.0,No,1
+EMP019,44,Research & Development,3470.0,No,4
+EMP020,24,Engineering,6600.0,No,9
+EMP021,49,Engineering,8935.0,No,4
+EMP022,26,Engineering,14135.0,No,13
+EMP023,53,Research & Development,11567.0,No,12
+EMP024,23,Engineering,10539.0,No,5
+EMP025,35,Engineering,11140.0,No,6
+EMP026,41,Research & Development,13969.0,Yes,9
+EMP027,58,Human Resources,5754.0,No,3
+EMP028,26,Research & Development,6136.0,Yes,12
+EMP029,49,Research & Development,14309.0,Yes,12
+EMP030,25,Research & Development,4979.0,No,8
+EMP031,29,Research & Development,15937.0,Yes,5
+EMP032,23,Sales,10164.0,No,7
+EMP033,36,Engineering,11589.0,No,4
+EMP034,29,Research & Development,4347.0,No,12
+EMP035,38,Engineering,5174.0,Yes,7
+EMP036,24,Engineering,5895.0,No,4
+EMP037,52,Research & Development,5294.0,No,2
+EMP038,41,Marketing,6666.0,No,3
+EMP039,56,Marketing,15628.0,No,5
+EMP040,49,Research & Development,13125.0,No,4
+EMP041,52,Research & Development,5379.0,No,13
+EMP042,40,Human Resources,12560.0,No,14
+EMP043,22,Sales,4765.0,No,1
+EMP044,56,Research & Development,11017.0,No,7
+EMP045,32,Marketing,5260.0,No,10
+EMP046,-5,Sales,10463.0,No,8
+EMP047,30,Human Resources,11060.0,Yes,8
+EMP048,35,Sales,5854.0,No,4
+EMP049,52,Research & Development,4445.0,Yes,12
+EMP050,39,Engineering,8720.0,Yes,3
+EMP051,26,Research & Development,9035.0,No,12
+EMP052,49,Research & Development,10579.0,No,7
+EMP053,49,Marketing,11213.0,No,2
+EMP054,41,Sales,11065.0,No,1
+EMP055,36,Marketing,15580.0,No,7
+EMP056,22,Engineering,4203.0,No,13
+EMP057,35,Engineering,12249.0,No,9
+EMP058,34,Engineering,13592.0,No,12
+EMP059,25,Research & Development,7950.0,No,4
+EMP060,28,Marketing,5809.0,No,11
+EMP061,25,Research & Development,11602.0,No,5
+EMP062,42,Marketing,10289.0,No,1
+EMP063,37,Human Resources,15795.0,No,6
+EMP064,32,Engineering,5646.0,No,2
+EMP065,45,Research & Development,10388.0,No,4
+EMP066,25,Sales,6718.0,No,1
+EMP067,58,Marketing,12694.0,Yes,7
+EMP068,27,Research & Development,15163.0,No,1
+EMP069,29,Research & Development,10708.0,No,9
+EMP070,44,Sales,9179.0,No,13
+EMP071,52,Engineering,4951.0,No,1
+EMP072,56,Research & Development,5835.0,No,8
+EMP073,42,Sales,5290.0,No,7
+EMP074,53,Human Resources,6022.0,No,9
+EMP075,34,Research & Development,6890.0,No,14
+EMP076,55,Research & Development,8934.0,No,12
+EMP077,44,Research & Development,10239.0,No,10
+EMP078,22,Research & Development,10729.0,No,11
+EMP079,56,Research & Development,15978.0,No,3
+EMP080,41,Research & Development,12448.0,No,12
+EMP081,26,Sales,7173.0,No,1
+EMP082,26,Research & Development,10866.0,No,13
+EMP083,57,Marketing,4868.0,No,7
+EMP084,45,Research & Development,5915.0,No,12
+EMP085,31,Research & Development,11194.0,No,6
+EMP086,43,Sales,6705.0,No,5
+EMP087,47,Research & Development,13219.0,No,2
+EMP088,28,Sales,4597.0,No,6
+EMP089,59,Research & Development,4852.0,No,6
+EMP090,52,Sales,13898.0,No,5
+EMP091,52,Research & Development,11227.0,Yes,5
+EMP092,24,Research & Development,15162.0,No,13
+EMP093,46,Research & Development,9199.0,Yes,12
+EMP094,39,Sales,5623.0,No,5
+EMP095,59,Research & Development,13310.0,No,3
+EMP096,47,Engineering,6966.0,No,8
+EMP097,57,Marketing,5783.0,No,2
+EMP098,38,Engineering,8739.0,No,10
+EMP099,34,Research & Development,14704.0,No,12
+EMP100,44,Sales,11890.0,No,4
+EMP101,40,Engineering,7796.0,Yes,12
+EMP102,25,Sales,9161.0,No,4
+EMP103,50,Research & Development,15482.0,No,11
+EMP104,53,Research & Development,5027.0,Yes,7
+EMP105,42,Engineering,12182.0,No,11
+EMP106,32,Research & Development,3018.0,No,13
+EMP107,30,Research & Development,9630.0,No,9
+EMP108,47,Research & Development,3748.0,No,6
+EMP109,30,Sales,5724.0,No,2
+EMP110,52,Sales,6953.0,No,2
+EMP111,34,Sales,7581.0,No,14
+EMP112,40,Human Resources,15132.0,No,2
+EMP113,51,Marketing,12200.0,No,12
+EMP114,50,Engineering,4214.0,No,13
+EMP115,22,Research & Development,15417.0,No,7
+EMP116,31,Engineering,8887.0,Yes,7
+EMP117,50,Research & Development,15621.0,Yes,10
+EMP118,24,Sales,4209.0,No,10
+EMP119,38,Engineering,3926.0,No,4
+EMP120,27,Research & Development,5396.0,No,4

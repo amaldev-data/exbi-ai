@@ -1,0 +1,151 @@
+Date,Category,Region,Amount,Quantity
+2025-04-13,Apparel,Latin America,421.4,4
+2025-02-21,Electronics,Asia-Pacific,964.46,8
+2025-04-03,Apparel,Latin America,361.46,9
+2025-01-15,Apparel,North America,554.82,7
+2025-04-17,Office Supplies,North America,140.22,1
+2025-03-13,Furniture,Latin America,,3
+2025-03-02,Office Supplies,North America,,9
+2025-01-21,Apparel,Latin America,,1
+2025-04-13,Electronics,Asia-Pacific,,9
+2025-03-24,Office Supplies,Latin America,,8
+2025-03-28,Office Supplies,Asia-Pacific,,1
+2025-03-16,Furniture,Latin America,229.9,6
+2025-03-16,Office Supplies,North America,-250.0,5
+2025-03-29,Apparel,Latin America,681.61,6
+2025-04-27,Apparel,North America,871.79,5
+2025-04-10,Apparel,Latin America,809.23,6
+2025-04-14,Electronics,Latin America,371.92,5
+2025-01-24,Electronics,Europe,1148.1,5
+2025-01-03,Electronics,North America,898.58,4
+2025-01-22,Furniture,Europe,687.51,3
+2025-02-22,Apparel,North America,753.48,3
+2025-01-02,Apparel,Europe,532.54,4
+2025-03-29,Software,Asia-Pacific,334.89,9
+2025-04-18,Electronics,Latin America,459.37,2
+2025-01-30,Apparel,North America,921.52,9
+2025-02-07,,North America,66.55,1
+2025-01-02,,Latin America,183.48,1
+2025-03-05,,North America,102.9,5
+2025-03-01,Electronics,North America,96.84,6
+2025-01-21,Electronics,Europe,1033.78,6
+2025-02-02,Software,North America,859.21,3
+2025-03-17,Office Supplies,Asia-Pacific,595.3,7
+2025-02-27,Furniture,Asia-Pacific,162.51,9
+2025-01-22,Office Supplies,Latin America,615.36,8
+2025-04-18,Office Supplies,North America,594.49,6
+2025-03-30,Electronics,Latin America,249.18,8
+2025-02-18,Office Supplies,Asia-Pacific,548.93,5
+2025-04-01,Apparel,North America,508.28,8
+2025-02-28,Office Supplies,North America,758.23,4
+2025-02-11,Office Supplies,Latin America,780.36,8
+2025-04-02,Apparel,Asia-Pacific,102.1,2
+2025-03-01,Electronics,North America,480.8,5
+2025-03-21,Electronics,Latin America,769.74,9
+2025-01-15,Apparel,Asia-Pacific,628.61,4
+2025-03-03,Office Supplies,Latin America,1034.96,6
+2025-03-03,Office Supplies,Europe,807.5,1
+2025-02-16,Electronics,North America,237.37,9
+2025-03-03,Apparel,Europe,131.15,1
+2025-02-20,Apparel,Asia-Pacific,788.78,5
+2025-04-18,Electronics,Europe,80.49,4
+2025-02-24,Electronics,Europe,723.64,3
+2025-04-26,Apparel,Asia-Pacific,1131.26,6
+2025-03-05,Software,Latin America,711.8,2
+2025-01-03,Apparel,Europe,496.4,3
+2025-04-11,Apparel,Latin America,789.78,5
+2025-02-20,Office Supplies,Europe,576.99,9
+2025-01-07,Apparel,Latin America,677.46,2
+2025-01-21,Software,Asia-Pacific,1132.68,8
+2025-03-14,Software,Europe,494.02,2
+2025-02-08,Electronics,Asia-Pacific,1155.37,5
+2025-01-18,Apparel,Europe,1091.15,7
+2025-01-04,Apparel,Asia-Pacific,275.16,8
+2025-03-30,Electronics,Asia-Pacific,129.77,1
+2025-03-01,Electronics,Europe,165.89,6
+2025-01-14,Furniture,Europe,70.96,1
+2025-04-24,Apparel,Europe,158.61,2
+2025-01-09,Electronics,North America,835.46,1
+2025-03-31,Electronics,Latin America,131.87,5
+2025-02-22,Software,North America,416.82,9
+2025-01-02,Electronics,North America,1021.61,6
+2025-03-25,Electronics,Asia-Pacific,76.76,1
+2025-04-02,Apparel,Europe,986.64,1
+2025-04-21,Software,Latin America,374.13,2
+2025-03-01,Electronics,Asia-Pacific,185.89,9
+2025-03-12,Furniture,North America,851.25,3
+2025-02-13,Office Supplies,Europe,773.28,1
+2025-01-08,Electronics,Asia-Pacific,1059.09,5
+2025-02-16,Office Supplies,Europe,895.33,7
+2025-02-04,Apparel,Asia-Pacific,974.0,6
+2025-03-19,Furniture,Europe,374.34,1
+2025-03-22,Furniture,North America,254.06,5
+2025-02-05,Apparel,Latin America,913.21,5
+2025-02-19,Electronics,North America,977.86,6
+2025-04-14,Office Supplies,Latin America,1189.08,3
+2025-01-04,Apparel,Europe,524.51,5
+2025-01-02,Electronics,Asia-Pacific,477.82,7
+2025-01-06,Electronics,North America,942.87,5
+2025-02-23,Furniture,Latin America,441.92,5
+2025-04-16,Furniture,North America,1120.37,5
+2025-01-04,Electronics,Latin America,1037.17,3
+2025-02-23,Apparel,North America,543.34,1
+2025-04-03,Electronics,Latin America,913.5,5
+2025-03-04,Furniture,Latin America,917.72,9
+2025-01-18,Electronics,Europe,168.59,1
+2025-03-31,Furniture,Latin America,1087.94,3
+2025-02-13,Apparel,Europe,631.04,4
+2025-02-03,Software,Latin America,1000.43,1
+2025-03-15,Electronics,Asia-Pacific,418.06,1
+2025-03-03,Apparel,Asia-Pacific,1079.85,8
+2025-04-10,Electronics,Asia-Pacific,497.58,2
+2025-01-14,Software,Latin America,62.46,8
+2025-04-05,Office Supplies,Europe,1091.19,7
+2025-02-17,Electronics,Europe,154.98,2
+2025-01-15,Furniture,Latin America,417.21,6
+2025-03-13,Office Supplies,Asia-Pacific,1142.57,6
+2025-03-19,Furniture,Asia-Pacific,1143.2,3
+2025-03-28,Apparel,Europe,709.45,2
+2025-03-03,Electronics,Asia-Pacific,776.61,1
+2025-02-09,Electronics,North America,565.71,6
+2025-03-26,Office Supplies,Europe,387.19,5
+2025-03-21,Software,Asia-Pacific,427.96,9
+2025-04-19,Furniture,Europe,823.4,1
+2025-03-23,Apparel,North America,915.23,7
+2025-04-21,Apparel,Europe,960.32,5
+2025-02-22,Office Supplies,Europe,958.06,5
+2025-01-24,Office Supplies,Europe,154.89,2
+2025-01-26,Office Supplies,Europe,618.58,3
+2025-03-30,Office Supplies,North America,116.19,7
+2025-03-01,Furniture,Latin America,681.96,6
+2025-04-19,Electronics,Europe,557.76,2
+2025-02-10,Electronics,Europe,1070.86,6
+2025-01-29,Office Supplies,Asia-Pacific,453.55,2
+2025-01-15,Furniture,Europe,184.63,2
+2025-02-14,Electronics,Asia-Pacific,214.44,2
+2025-03-06,Electronics,Latin America,925.74,3
+2025-03-30,Furniture,North America,760.95,2
+2025-03-12,Electronics,North America,166.29,4
+2025-01-09,Electronics,Latin America,146.72,9
+2025-03-29,Apparel,North America,856.11,6
+2025-01-01,Furniture,Latin America,133.68,1
+2025-04-18,Furniture,Latin America,995.14,8
+2025-01-08,Electronics,Latin America,862.18,7
+2025-03-29,Office Supplies,North America,143.55,3
+2025-03-04,Electronics,Asia-Pacific,147.56,1
+2025-01-11,Apparel,Latin America,1184.64,5
+2025-04-25,Office Supplies,Europe,480.41,4
+2025-03-22,Furniture,North America,476.24,8
+2025-01-08,Office Supplies,Latin America,984.72,1
+2025-02-04,Furniture,Latin America,1139.34,1
+2025-02-04,Furniture,Europe,1183.9,4
+2025-02-02,Electronics,Asia-Pacific,916.38,8
+2025-01-05,Apparel,Asia-Pacific,482.7,5
+2025-04-16,Electronics,Asia-Pacific,146.03,2
+2025-04-13,Electronics,Latin America,943.72,6
+2025-02-10,Software,Latin America,692.16,5
+2025-01-28,Apparel,Latin America,537.86,2
+2025-01-07,Office Supplies,North America,1092.31,3
+2025-03-14,Furniture,Europe,177.88,9
+2025-03-13,Office Supplies,Latin America,616.52,7
+2025-01-12,Apparel,Europe,63.06,7
