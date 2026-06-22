@@ -1,4 +1,4 @@
-# exbi AI: Multi-Agent Analytics Platform 
+# exbi ai : Multi-Agent Analytics Platform 
 
 **Exbi AI** is an asynchronous, multi-agent AI-powered data analytics consulting platform designed to simulate a real-world data science team. It enables users to upload datasets (CSV/Excel), automatically determines the business domain, recommends customized analysis paths, cleanses data, runs quality checks, designs interactive visualization specs, compiles professional markdown executive reports, and generates ready-to-download PDF and Word reports.
 
