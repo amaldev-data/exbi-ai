@@ -1,6 +1,6 @@
 # exbi ai : Multi-Agent Analytics Platform 
 
-![Exbi AI Platform](Image/screenshot.png)
+![exbi-ai](Image/screenshot.png)
 
 **Exbi AI** is an asynchronous, multi-agent AI-powered data analytics consulting platform designed to simulate a real-world data science team. It enables users to upload datasets (CSV/Excel), automatically determines the business domain, recommends customized analysis paths, cleanses data, runs quality checks, designs interactive visualization specs, compiles professional markdown executive reports, and generates ready-to-download PDF and Word reports.
 
@@ -120,5 +120,6 @@ To guarantee 100% uptime, zero API usage costs, and painless hosting on free-tie
 ---
 
 Developer: Amaldev K M
-- GitHub: https://github.com/amaldev-data
+- email: amaldev.connect@gmail.com
+- website: https://amaldev-data.github.io/website/
 - Project: exbi ai – Multi AI agent platform
