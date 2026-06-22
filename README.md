@@ -1,137 +1,175 @@
-# Agentic Analytics OS (Portfolio Project Edition)
+# Exbi AI: Asynchronous Multi-Agent Analytics Consulting OS
 
-An asynchronous, multi-agent AI-powered data analytics consulting platform designed to simulate a real-world data science consulting team. 
+**Exbi AI** is an asynchronous, multi-agent AI-powered data analytics consulting platform designed to simulate a real-world data science team. It enables users to upload datasets (CSV/Excel), automatically determines the business domain, recommends customized analysis paths, cleanses data, runs quality checks, designs interactive visualization specs, compiles professional markdown executive reports, and generates ready-to-download PDF and Word reports.
 
-This platform allows users to upload CSV/Excel files, automatically determines the dataset's business domain, recommends custom analyses, conducts a virtual department kickoff meeting, profiles, cleans and validates the data against business rules, builds interactive dashboards, and publishes download-ready PDF and Word reports.
-
----
-
-## Key Features
-
-1. **Dataset Discovery & Domain Autodetect**: The system profiles shape, data types, and null value densities, then uses LLM querying to infer the business domain (Sales, HR, Churn, or Operations).
-2. **Requirements Recommendation**: Dynamically generates tailored analytical roadmaps matching the domain.
-3. **14 Coordinating AI Agents**: Features specialized agents communicating over a shared state blackboard (using an SQLite persistent log database).
-4. **Virtual Kickoff Meeting**: Simulates a detailed team chat where 9 department leaders argue priorities, align on validations, and finalize the Project Strategy.
-5. **Deduplication & Imputation**: Executes Pandas pipelines to drop duplicate records and impute missing variables.
-6. **Business Constraint Checking**: Identifies numeric violations (negative values in sales/incomes) and statistical outliers.
-7. **Chart.js Dashboard**: Renders interactive, styled KPI cards, bar charts, trend lines, and pie charts.
-8. **Automated Publishing**: Generates styled PDF reports (via ReportLab flowables) and Word documents (via python-docx) embedding backend Matplotlib charts.
-9. **Zero API Cost & Dual-Mode Execution**: Operates using local Ollama instances (`llama3`, `mistral`, `gemma`, `qwen`) and falls back to a smart Analytical Template Engine if no LLM server is online (ideal for free-tier Render cloud hosting).
-10. **Recruiter Sandbox Mode**: Recruiters can load pre-constructed sample datasets (Sales, HR) to test the entire application instantly without uploading files.
+The platform is designed to operate seamlessly in both **Local LLM Mode** (via Ollama) and **Dual-Mode/Offline Fallback Mode** (via an Analytical heuristic template engine), making it highly reliable and inexpensive to deploy on cloud platforms (e.g., Render Free Tier).
 
 ---
 
-## Agent Network Design
+## 🚀 Key System Features
 
-The system runs 14 specialized agents coordinated by a **Program Manager Agent**:
-
-| Department | Agent Persona | Responsibilities |
-|---|---|---|
-| **Discovery** | 1. Dataset Discovery Agent | Profiles schema, detects dates, and identifies business domain. |
-| **Requirements** | 2. Requirement Recommendation Agent | Suggests specific analyses and dashboard targets. |
-| **Business Analysis** | 3. Business Analyst Agent | Interprets requirements, creates the Business Requirement Document (BRD). |
-| | 4. Analytics Strategy Agent | Translates the BRD into a technical project strategy and validations roadmap. |
-| **Kickoff Meeting** | -- Meeting Facilitator | Convenes and records dialogue consensus between all department heads. |
-| **Data Quality** | 5. Data Profiling Agent | Computes null densities, duplicates, and outlier records. |
-| | 6. Data Cleaning Agent | Executes Pandas imputation (median and placeholder replacements). |
-| | 7. Data Quality Validation Agent | Checks business rule logic (non-negatives constraints). |
-| | 8. Data QA Agent | Reviews cleanup stats, issues the Data Quality Certification. |
-| **Visualization** | 9. Visualization Planner Agent | Maps out layout blueprints (grid column formats, KPI selectors). |
-| | 10. Visualization Builder Agent | Compiles Chart.js configurations and renders Matplotlib charts. |
-| | 11. Visualization QA Agent | Verifies chart title labels and corporate brand color compliance. |
-| **Reporting** | 12. Executive Report Writer | Authors structured executive markdown reports. |
-| | 13. Report QA Agent | Audits report consistency, spelling, and professional tone. |
-| **Governance** | 14. Executive QA Agent | Signs off the project with the Final Governance Certificate. |
+1. **Dataset Discovery & Domain Autodetect**: Profiles dataset dimensions, null value densities, and column data types. It programmatically infers the target business domain (such as *Sales*, *HR*, *Customer Churn*, or *Operations*).
+2. **Requirements Recommendation**: Dynamically generates tailored analytical roadmaps matching the identified business domain.
+3. **Multi-Agent Blackboard Architecture**: Coordinated by a central Program Manager Orchestrator, a network of specialized agents communicate asynchronously using an SQLite database (`analytics_platform.db`) as a shared blackboard.
+4. **Data Cleaning & Imputation**: Executes automated Pandas pipelines to drop duplicate records and impute missing variables.
+5. **Business Constraint Checking**: Identifies business rule violations (e.g., negative values in sales or monthly incomes) and highlights statistical outliers.
+6. **Chart.js Visualizations**: Automatically designs and constructs Chart.js specs (JSON) for interactive KPI cards, bar charts, trend lines, and pie charts.
+7. **Automated Publishing**: Generates styled PDF reports (via ReportLab flowables) and Word documents (via python-docx) embedding backend-rendered Matplotlib charts.
+8. **Recruiter Sandbox Mode**: Allows recruiters or guests to test the end-to-end pipeline instantly using pre-built mock datasets (Sales, HR) without needing local file uploads.
 
 ---
 
-## Folder Structure
+## 📂 Detailed Folder Structure
+
+The project layout is divided into a clean frontend-backend split:
 
 ```
-agentic-analytics-os/
-├── index.html             # Workspace setup, sample loaders, portfolio hub
-├── dashboard.html         # Active results dashboard, logs terminal, widgets
-├── reports.html           # Markdown previewer and document downloads
-├── assets/
-│   ├── css/
-│   │   └── styles.css     # Consulting theme variables
-│   └── js/
-│       └── app.js         # State coordinator, AJAX calls, Chart.js builder
-├── backend/
-│   ├── main.py            # FastAPI main endpoints
-│   ├── settings.json      # LLM host configs
-│   ├── database/          # Persistent SQLite layer
-│   │   ├── db_manager.py
-│   │   └── analytics_platform.db
-│   ├── services/          # Pandas, Matplotlib, ReportLab engines
-│   │   ├── data_engine.py
-│   │   ├── report_generator.py
-│   │   └── llm_service.py
-│   └── agents/            # Individual agent classes
-│       ├── base.py
-│       ├── discovery_agent.py
-│       ├── recommendation_agent.py
-│       ├── business_analyst.py
-│       ├── strategist.py
-│       ├── quality_agents.py
-│       ├── viz_agents.py
-│       ├── report_agents.py
-│       └── executive_qa.py
+Exbi AI/
+├── index.html             # Main single-page application frontend interface
+├── styles.css             # Unified application styles and glassmorphic dark-mode theme
+├── app.js                 # Frontend orchestrator, AJAX requester, and Chart.js renderer
+├── run.bat                # Batch file to configure environment and boot server
+├── setup.bat              # Batch file to set up virtual environment and install packages
+├── run.py                 # Python wrapper script to boot backend server
 ├── requirements.txt       # Python package list
-└── README.md              # Documentation
+├── render.yaml            # Render Cloud service blueprints
+├── verify_redesign.py     # Backend test script verifying pipeline stages
+├── backend/
+│   ├── main.py            # FastAPI endpoints, routers, and CORS configurations
+│   ├── settings.json      # LLM host and model configuration JSON
+│   ├── database/          # SQLite database storage & SQLAlchemy ORM layer
+│   │   ├── db_manager.py  # DB session creator & schemas (projects, agent_logs)
+│   │   └── analytics_platform.db # SQLite database file (auto-generated)
+│   ├── services/          # Analytical calculation and file compilation services
+│   │   ├── data_engine.py      # Pandas & Matplotlib processing (cleaning, profiling)
+│   │   ├── report_generator.py # File exporters (ReportLab PDF, python-docx Word)
+│   │   └── llm_service.py      # LLM API connector & Analytical Fallback Engine
+│   └── agents/            # Multi-Agent Framework classes
+│       ├── base.py                 # Abstract base class for all agents
+│       ├── orchestrator.py         # Program Manager Agent that directs execution flow
+│       ├── dataset_intelligence.py  # Profiles schema, types, and identifies domains
+│       ├── business_analyst.py     # Recommends targets and maps requirements
+│       ├── data_quality.py         # Runs null/duplicate/outlier analysis and cleansing
+│       ├── visualization_agent.py  # Generates visualization specs and plans layouts
+│       ├── reporting_agent.py      # Authors executive summaries, reports, and QA checks
+│       └── session_manager.py      # Handles data purging and session hygiene
 ```
 
 ---
 
-## Installation & Setup
+## 🤖 The Multi-Agent Framework
+
+The system utilizes an agent network coordinated by the **Program Manager Agent**. Each agent is built as a class inheriting from a common `BaseAgent` parent class, allowing structured logging and uniform API access.
+
+```mermaid
+graph TD
+    UI[Frontend User Interface] -->|1. Upload File & Run Ingestion| PM[Program Manager Agent]
+    PM -->|Synchronous Discovery| DI[Dataset Intelligence Agent]
+    PM -->|Synchronous Recommendations| BA[Business Analyst Agent]
+    BA -->|2. Suggest Options| UI
+    UI -->|3. Approve Options & Execute Pipeline| PM
+    
+    subgraph Asynchronous Execution Pipeline
+        PM -->|4. Clean & Profile| DQ[Data Quality Agent]
+        DQ -->|5. Structure Business Plan| BA
+        BA -->|6. Map Chart Spec JSON| VZ[Visualization Agent]
+        VZ -->|7. Compile Reports & Certify| RP[Reporting Agent]
+    end
+    
+    RP -->|8. Save Final Deliverables| DB[(SQLite Database Blackboard)]
+    PM -->|9. Push Event Updates| UI
+```
+
+### 1. Agent Personas & Responsibilities
+
+| Agent Persona | Parent File | Key Responsibilities |
+|---|---|---|
+| **Program Manager Agent** *(Orchestrator)* | `orchestrator.py` | Initiates the pipeline, coordinates agent hand-offs, manages job states in the database, and reports real-time terminal logs to the frontend UI. |
+| **Dataset Intelligence Agent** | `dataset_intelligence.py` | Conducts ingestion, detects file encoding/format, profiles table dimensions, and programmatically classifies columns into *Identifier*, *Boolean*, *Date*, *Numerical*, *Text*, or *Categorical*. |
+| **Business Analyst Agent** | `business_analyst.py` | Analyzes business context and recommends tailored analyses. During Phase 2, maps selected analysis tasks to concrete business question frameworks. |
+| **Data Quality Agent** | `data_quality.py` | Identifies duplicate records, calculates null density, executes Pandas-based cleaning (median/mode imputations), and flags outlier data violating business rules. |
+| **Visualization Agent** | `visualization_agent.py` | Selects appropriate variables for charts, plans the grid layout, and constructs Chart.js JSON configurations for the frontend. |
+| **Reporting Agent** | `reporting_agent.py` | Translates statistical metrics into structured markdown paragraphs, runs style/tone checks, and attaches a signed Governance Approval Certificate. |
+| **Session Manager Agent** | `session_manager.py` | Deletes temporary uploads, charts, and database rows to maintain clean environment states. |
+
+### 2. How the Agents Work: The Blackboard Pattern
+Rather than using direct REST messaging between agents, the framework adopts the **Blackboard Pattern**:
+- **Shared State**: All agents read from and write to the SQLite database `projects` and `agent_logs` tables.
+- ** чёрный ящик (Blackboard)**: The `agent_logs` table acts as a global message log where agents write debug messages, intermediate decisions, and metadata.
+- **Log Streaming**: The frontend regularly polls the `/api/logs/<project_id>` endpoint. This allows users to watch the agent department leaders "argue," discuss data quality rules, compile statistics, and sign off on dashboards in a mock console window.
+
+---
+
+## 🧠 LLM Integration & Dual-Mode Execution
+
+### 1. Primary Model: Local Ollama (`llama3`)
+By default, the `LLMService` is configured to communicate with a local **Ollama** server running on port `11434`. 
+- **Model**: `llama3` (Default; can be configured to use `mistral`, `gemma`, `qwen`, or `phi` in `backend/settings.json`).
+- **Mode**: Structured JSON generation (`format: json` parameter in Ollama API) is utilized heavily by the Dataset Discovery, Business Analyst, and Visualization agents to ensure data integrity during schema mapping.
+
+### 2. Analytical Fallback Engine
+To guarantee 100% uptime, zero API usage costs, and painless hosting on free-tier cloud environments, `llm_service.py` features a robust programmatic **Analytical Fallback Engine**:
+- **Trigger**: Activated automatically if Ollama fails to respond or is offline.
+- **Mechanism**: Performs data-driven structural mapping using deterministic heuristics:
+  - Detects columns by keyword clustering (e.g., matching salary keywords to "HR", price keywords to "Sales").
+  - Formulates structured JSON analysis specs dynamically based on actual Pandas dataset statistics.
+  - Builds rich, domain-customized markdown reports featuring executive summaries, data quality writeups, and strategic actions.
+
+---
+
+## 🛠️ Installation & Setup
 
 ### Prerequisites
-* Python 3.10+
+* Python 3.10 or higher
 * (Optional) [Ollama](https://ollama.com/) running locally with the `llama3` model.
 
-### 1. Run the Backend Server
-1. Clone the repository and navigate to the project directory:
+### Quick Setup (Windows)
+Double-click `setup.bat` to automatically build your virtual environment and install all dependencies:
+```cmd
+setup.bat
+```
+Then start the server using:
+```cmd
+run.bat
+```
+
+### Manual Installation (All Operating Systems)
+1. **Clone the repository**:
    ```bash
-   cd agentic-analytics-os
+   cd exbi-ai
    ```
-2. Create and activate a virtual environment:
+2. **Create and activate a virtual environment**:
    ```bash
    python -m venv venv
    source venv/bin/activate  # On Windows: venv\Scripts\activate
    ```
-3. Install dependencies:
+3. **Install dependencies**:
    ```bash
    pip install -r requirements.txt
    ```
-4. Start the FastAPI backend:
+4. **Run the FastAPI server**:
    ```bash
-   uvicorn backend.main:app --reload
+   python run.py
    ```
-   *The server runs on `http://127.0.0.1:8000` by default.*
+   *The backend will boot on `http://127.0.0.1:8000`.*
 
-### 2. Run the Frontend
-Because the frontend consists of pure, static HTML/CSS/JS files, you do not need node/npm servers!
-* Simply open `index.html` in your web browser.
-* *Recruiter Tip:* If hosting the static frontend on GitHub Pages, open the **Settings** modal in the sidebar and enter your hosted FastAPI backend Render URL (e.g., `https://your-backend.onrender.com`).
+5. **Open the Frontend**:
+   Since the frontend consists of static `index.html`, `styles.css`, and `app.js` files, you do not need an npm server. Simply open `index.html` directly in any web browser.
 
 ---
 
-## Deployment Guide
+## 🌐 Deployment Guide
 
-### Frontend (GitHub Pages)
-1. Commit the repository to a GitHub repository.
-2. In the repository settings, go to **Pages**, select **Deploy from a branch**, and choose `/root` or the main branch.
-3. Save and copy the public URL.
+### Frontend Hosting (GitHub Pages)
+1. Push your code repository to GitHub.
+2. In the repository settings, go to **Pages**, select **Deploy from a branch**, and choose the `main` branch.
+3. Once deployed, open the settings panel (clicking the **A** icon in the top right of your hosted dashboard) and enter your backend Render URL.
 
-### Backend (Render Free Tier)
-1. Create a new **Web Service** on Render, linking to your repository.
+### Backend Hosting (Render Free Tier)
+1. Create a new **Web Service** on Render and connect it to your GitHub repository.
 2. Select **Python** runtime environment.
-3. Build Command:
-   ```bash
-   pip install -r requirements.txt
-   ```
-4. Start Command:
-   ```bash
-   uvicorn backend.main:app --host 0.0.0.0 --port $PORT
-   ```
-5. Add environment variable: `PYTHONUNBUFFERED=1`.
+3. Configure the following commands:
+   - **Build Command**: `pip install -r requirements.txt`
+   - **Start Command**: `uvicorn backend.main:app --host 0.0.0.0 --port $PORT`
+4. Add the following environment variable to prevent logging latency:
+   - `PYTHONUNBUFFERED=1`
