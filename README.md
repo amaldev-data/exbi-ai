@@ -120,5 +120,5 @@ To guarantee 100% uptime, zero API usage costs, and painless hosting on free-tie
 ---
 
 Developer: Amaldev K M
-GitHub: https://github.com/amaldev-data
-Project: exbi ai – Multi AI agent platform
+- GitHub: https://github.com/amaldev-data
+- Project: exbi ai – Multi AI agent platform
