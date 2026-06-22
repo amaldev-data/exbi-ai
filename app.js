@@ -1565,24 +1565,20 @@ const AGENT_REGISTRY = {
     experience: "Founder & CEO",
     avatar: "Image/avatar_amaldev.png",
     agent_type: "Human",
-    current_role: "Leading product vision, strategy, and innovation for EXBI",
+    current_role: "Developed exbi ai",
     skills: [
       "Data Science & Analytics",
-      "Business Intelligence",
-      "AI Product Development",
-      "Dashboard Design",
-      "Business Strategy"
+      "AI Product Development"
     ],
     education: [
       "MBA (Finance & Marketing)",
       "B.Com Computer Applications",
       "Diploma in Data Science"
     ],
-    role_desc: "Leading product vision, strategy, and innovation for EXBI.",
-    vision: "Making data-driven decision-making simple, intelligent, and accessible through AI."
+    role_desc: "Currenly do nothing."
   },
   dataset_intelligence: {
-    name: "Victor Vance",
+    name: "Victor ",
     id: "EXBI-DI-001",
     department: "Data Engineering",
     role: "Lead Ingestion & Profiling Engineer",
@@ -1608,7 +1604,7 @@ const AGENT_REGISTRY = {
     ]
   },
   business_analyst: {
-    name: "Michael Reed",
+    name: "Michael",
     id: "EXBI-BA-001",
     department: "Business Analysis",
     role: "Senior Business Analyst",
@@ -1635,7 +1631,7 @@ const AGENT_REGISTRY = {
     ]
   },
   data_quality: {
-    name: "Quinn Vance",
+    name: "Quinn",
     id: "EXBI-DQ-001",
     department: "Data Quality & Cleansing",
     role: "Principal Data Quality Engineer",
@@ -1661,7 +1657,7 @@ const AGENT_REGISTRY = {
     ]
   },
   visualization: {
-    name: "Regina Chen",
+    name: "Regina",
     id: "EXBI-VIZ-001",
     department: "Data Visualization",
     role: "Senior Visualization Architect",
@@ -1687,7 +1683,7 @@ const AGENT_REGISTRY = {
     ]
   },
   reporting: {
-    name: "David Kim",
+    name: "David",
     id: "EXBI-RP-001",
     department: "Document Systems",
     role: "Executive Reporting Analyst",
