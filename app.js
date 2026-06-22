@@ -1,6 +1,6 @@
 // Configuration management
 const API_KEY_SETTINGS = "agentic_analytics_api_url";
-const DEFAULT_API_URL = "http://127.0.0.1:8000";
+const DEFAULT_API_URL = "https://exbi-ai.onrender.com";
 
 function getApiUrl() {
   return localStorage.getItem(API_KEY_SETTINGS) || DEFAULT_API_URL;
