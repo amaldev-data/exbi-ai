@@ -1,4 +1,4 @@
-# Exbi AI: Asynchronous Multi-Agent Analytics Consulting OS
+# exbi AI: Multi-Agent Analytics Platform 
 
 **Exbi AI** is an asynchronous, multi-agent AI-powered data analytics consulting platform designed to simulate a real-world data science team. It enables users to upload datasets (CSV/Excel), automatically determines the business domain, recommends customized analysis paths, cleanses data, runs quality checks, designs interactive visualization specs, compiles professional markdown executive reports, and generates ready-to-download PDF and Word reports.
 
@@ -6,7 +6,7 @@ The platform is designed to operate seamlessly in both **Local LLM Mode** (via O
 
 ---
 
-## 🚀 Key System Features
+##  Key System Features
 
 1. **Dataset Discovery & Domain Autodetect**: Profiles dataset dimensions, null value densities, and column data types. It programmatically infers the target business domain (such as *Sales*, *HR*, *Customer Churn*, or *Operations*).
 2. **Requirements Recommendation**: Dynamically generates tailored analytical roadmaps matching the identified business domain.
@@ -19,7 +19,7 @@ The platform is designed to operate seamlessly in both **Local LLM Mode** (via O
 
 ---
 
-## 📂 Detailed Folder Structure
+##  Detailed Folder Structure
 
 The project layout is divided into a clean frontend-backend split:
 
@@ -57,7 +57,7 @@ Exbi AI/
 
 ---
 
-## 🤖 The Multi-Agent Framework
+##  The Multi-Agent Framework
 
 The system utilizes an agent network coordinated by the **Program Manager Agent**. Each agent is built as a class inheriting from a common `BaseAgent` parent class, allowing structured logging and uniform API access.
 
@@ -100,7 +100,7 @@ Rather than using direct REST messaging between agents, the framework adopts the
 
 ---
 
-## 🧠 LLM Integration & Dual-Mode Execution
+##  LLM Integration & Dual-Mode Execution
 
 ### 1. Primary Model: Local Ollama (`llama3`)
 By default, the `LLMService` is configured to communicate with a local **Ollama** server running on port `11434`. 
@@ -117,59 +117,6 @@ To guarantee 100% uptime, zero API usage costs, and painless hosting on free-tie
 
 ---
 
-## 🛠️ Installation & Setup
-
-### Prerequisites
-* Python 3.10 or higher
-* (Optional) [Ollama](https://ollama.com/) running locally with the `llama3` model.
-
-### Quick Setup (Windows)
-Double-click `setup.bat` to automatically build your virtual environment and install all dependencies:
-```cmd
-setup.bat
-```
-Then start the server using:
-```cmd
-run.bat
-```
-
-### Manual Installation (All Operating Systems)
-1. **Clone the repository**:
-   ```bash
-   cd exbi-ai
-   ```
-2. **Create and activate a virtual environment**:
-   ```bash
-   python -m venv venv
-   source venv/bin/activate  # On Windows: venv\Scripts\activate
-   ```
-3. **Install dependencies**:
-   ```bash
-   pip install -r requirements.txt
-   ```
-4. **Run the FastAPI server**:
-   ```bash
-   python run.py
-   ```
-   *The backend will boot on `http://127.0.0.1:8000`.*
-
-5. **Open the Frontend**:
-   Since the frontend consists of static `index.html`, `styles.css`, and `app.js` files, you do not need an npm server. Simply open `index.html` directly in any web browser.
-
----
-
-## 🌐 Deployment Guide
-
-### Frontend Hosting (GitHub Pages)
-1. Push your code repository to GitHub.
-2. In the repository settings, go to **Pages**, select **Deploy from a branch**, and choose the `main` branch.
-3. Once deployed, open the settings panel (clicking the **A** icon in the top right of your hosted dashboard) and enter your backend Render URL.
-
-### Backend Hosting (Render Free Tier)
-1. Create a new **Web Service** on Render and connect it to your GitHub repository.
-2. Select **Python** runtime environment.
-3. Configure the following commands:
-   - **Build Command**: `pip install -r requirements.txt`
-   - **Start Command**: `uvicorn backend.main:app --host 0.0.0.0 --port $PORT`
-4. Add the following environment variable to prevent logging latency:
-   - `PYTHONUNBUFFERED=1`
+Developer: Amaldev K M
+GitHub: https://github.com/amaldev-data
+Project: exbi ai – Multi AI agent platform
