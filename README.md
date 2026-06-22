@@ -1,4 +1,4 @@
-# exbi ai : Multi-Agent Analytics Platform 
+# exbi ai : Multi-Agents Analytics Platform 
 
 ## Application Preview
 
